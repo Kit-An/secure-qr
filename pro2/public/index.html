@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SRENOOG | QR Security</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================
+           BODY
+        ========================== */
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #15132a 0%,
+                    #0a0a10 40%,
+                    #06060a 100%
+                );
+
+            color: white;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           PAGE WRAPPER
+        ========================== */
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+
+            padding: 50px 20px;
+        }
+
+
+        /* =========================
+           MAIN CARD
+        ========================== */
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+
+            height: fit-content;
+
+            background: rgba(17, 17, 25, 0.96);
+
+            border: 1px solid #292938;
+
+            border-radius: 22px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.45),
+                0 0 50px rgba(100, 80, 255, 0.08);
+        }
+
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .header {
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+
+        .logo {
+            display: inline-block;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            letter-spacing: 6px;
+
+            color: #8b7cff;
+
+            margin-bottom: 15px;
+        }
+
+
+        h1 {
+            font-size: 38px;
+
+            line-height: 1.2;
+
+            margin-bottom: 12px;
+        }
+
+
+        .subtitle {
+            color: #92929f;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           INPUT SECTION
+        ========================== */
+
+        .input-section {
+            margin-top: 30px;
+        }
+
+
+        .input-label {
+            display: block;
+
+            margin-bottom: 10px;
+
+            font-size: 14px;
+
+            color: #c5c5d0;
+        }
+
+
+        .url-input {
+            width: 100%;
+
+            padding: 17px 16px;
+
+            background: #09090f;
+
+            border: 1px solid #303040;
+
+            border-radius: 12px;
+
+            color: white;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+
+        .url-input:focus {
+            border-color: #7567ff;
+
+            box-shadow:
+                0 0 18px rgba(117, 103, 255, 0.15);
+        }
+
+
+        .url-input::placeholder {
+            color: #626272;
+        }
+
+
+        /* =========================
+           MAIN BUTTON
+        ========================== */
+
+        .generate-btn {
+            width: 100%;
+
+            margin-top: 18px;
+
+            padding: 17px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: linear-gradient(
+                135deg,
+                #6f61ff,
+                #8b7cff
+            );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 30px rgba(117, 103, 255, 0.25);
+        }
+
+
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+
+
+        /* =========================
+           SECURITY STATUS
+        ========================== */
+
+        .security {
+            margin-top: 30px;
+
+            padding: 25px;
+
+            background: #0b0b12;
+
+            border: 1px solid #292938;
+
+            border-radius: 15px;
+
+            text-align: center;
+        }
+
+
+        .security-title {
+            font-size: 12px;
+
+            color: #777789;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+
+        .status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 11px 20px;
+
+            border-radius: 30px;
+
+            background: #15151f;
+
+            border: 1px solid #292938;
+
+            font-size: 15px;
+
+            font-weight: bold;
+        }
+
+
+        .status-dot {
+            width: 11px;
+
+            height: 11px;
+
+            border-radius: 50%;
+
+            background: #777;
+
+            box-shadow:
+                0 0 8px rgba(255, 255, 255, 0.15);
+        }
+
+
+        .status-text {
+            color: #c2c2ce;
+        }
+
+        .key-mode-section {
+            margin-top: 4px;
+        }
+
+        .key-mode-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #8a8a99;
+            margin-bottom: 8px;
+        }
+
+        .key-mode-toggle {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+
+        .key-mode-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #c2c2ce;
+            cursor: pointer;
+        }
+
+        .key-mode-option input[type="radio"] {
+            accent-color: #7567ff;
+            cursor: pointer;
+        }
+
+        .own-key-input {
+            margin-bottom: 8px;
+        }
+
+        .key-mode-hint {
+            font-size: 12px;
+            color: #8a8a99;
+            min-height: 16px;
+        }
+
+        /* Risk-state colors, added for backend integration */
+        .status-dot.checking {
+            background: #7567ff;
+            animation: pulse 1s infinite ease-in-out;
+        }
+
+        .status-dot.low {
+            background: #2ecc71;
+            box-shadow: 0 0 8px rgba(46, 204, 113, 0.6);
+        }
+
+        .status-dot.medium {
+            background: #f1c40f;
+            box-shadow: 0 0 8px rgba(241, 196, 15, 0.6);
+        }
+
+        .status-dot.high {
+            background: #e74c3c;
+            box-shadow: 0 0 8px rgba(231, 76, 60, 0.6);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
+        }
+
+        .qr-placeholder img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        .download-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+
+        .status-description {
+            margin-top: 13px;
+
+            color: #777789;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           QR RESULT
+        ========================== */
+
+        .result {
+            margin-top: 30px;
+
+            padding: 25px;
+
+            background: #0b0b12;
+
+            border: 1px solid #292938;
+
+            border-radius: 15px;
+
+            text-align: center;
+        }
+
+
+        .result-title {
+            font-size: 14px;
+
+            color: #9b9ba8;
+
+            margin-bottom: 22px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           QR PLACEHOLDER
+        ========================== */
+
+        .qr-placeholder {
+            width: 220px;
+
+            height: 220px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background: #161620;
+
+            border: 2px dashed #3a3a4d;
+
+            border-radius: 12px;
+
+            color: #666678;
+
+            font-size: 14px;
+
+            text-align: center;
+        }
+
+
+        /* =========================
+           URL DISPLAY
+        ========================== */
+
+        .url-display {
+            margin-top: 22px;
+
+            padding: 15px;
+
+            background: #14141e;
+
+            border: 1px solid #20202d;
+
+            border-radius: 10px;
+
+            text-align: left;
+        }
+
+
+        .url-display span {
+            display: block;
+
+            font-size: 12px;
+
+            color: #777789;
+
+            margin-bottom: 6px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+
+        .url-text {
+            color: #b9b4ff;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            word-break: break-all;
+        }
+
+
+        /* =========================
+           DOWNLOAD BUTTON
+        ========================== */
+
+        .download-btn {
+            margin-top: 18px;
+
+            padding: 12px 25px;
+
+            background: transparent;
+
+            border: 1px solid #3a3a50;
+
+            border-radius: 10px;
+
+            color: #aaaabc;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        .download-btn:hover {
+            border-color: #7567ff;
+
+            color: white;
+
+            box-shadow:
+                0 5px 20px rgba(117, 103, 255, 0.1);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        .footer {
+            margin-top: 35px;
+
+            padding-top: 28px;
+
+            border-top: 1px solid #292938;
+
+            text-align: center;
+
+            color: #656575;
+
+            font-size: 12px;
+        }
+
+
+        .made-by {
+            letter-spacing: 2px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .made-by strong {
+            display: block;
+
+            margin-top: 8px;
+
+            color: #8b7cff;
+
+            font-size: 17px;
+
+            letter-spacing: 4px;
+
+            text-shadow:
+                0 0 15px rgba(139, 124, 255, 0.25);
+        }
+
+
+        /* =========================
+           TEAM
+        ========================== */
+
+        .team {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+            width: 100%;
+
+            max-width: 320px;
+
+            margin: 0 auto;
+        }
+
+
+        .team-row {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+        }
+
+
+        .team-row span {
+            padding: 11px;
+
+            background: #0b0b12;
+
+            border: 1px solid #292938;
+
+            border-radius: 8px;
+
+            color: #b5b5c4;
+
+            font-size: 13px;
+
+            letter-spacing: 1px;
+
+            transition: 0.3s;
+        }
+
+
+        .team-row span:hover {
+            border-color: #7567ff;
+
+            color: white;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 15px rgba(117, 103, 255, 0.12);
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .page {
+                padding: 20px 12px;
+            }
+
+
+            .container {
+                padding: 25px 18px;
+
+                border-radius: 18px;
+            }
+
+
+            h1 {
+                font-size: 30px;
+            }
+
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+
+            .qr-placeholder {
+                width: 190px;
+
+                height: 190px;
+            }
+
+
+            .team {
+                max-width: 280px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="page">
+
+        <div class="container">
+
+
+            <!-- =========================
+                 HEADER
+            ========================== -->
+
+            <div class="header">
+
+                <div class="logo">
+                    SRENOOG
+                </div>
+
+                <h1>
+                    QR Security
+                </h1>
+
+                <p class="subtitle">
+                    Check your link before generating a QR code.
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 URL INPUT
+            ========================== -->
+
+            <div class="input-section">
+
+                <label
+                    class="input-label"
+                    for="urlInput"
+                >
+                    Paste your URL
+                </label>
+
+
+                <input
+                    type="text"
+                    class="url-input"
+                    id="urlInput"
+                    placeholder="https://example.com"
+                    autocomplete="off"
+                >
+
+                <div class="key-mode-section">
+                    <div class="key-mode-label">Safe Browsing check</div>
+                    <div class="key-mode-toggle">
+                        <label class="key-mode-option">
+                            <input type="radio" name="keyMode" value="default" id="keyModeDefault" checked>
+                            Use Default
+                        </label>
+                        <label class="key-mode-option">
+                            <input type="radio" name="keyMode" value="own" id="keyModeOwn">
+                            Use Your Own Key
+                        </label>
+                    </div>
+                    <input
+                        type="text"
+                        class="url-input own-key-input"
+                        id="ownApiKeyInput"
+                        placeholder="Paste your Google Safe Browsing API key"
+                        autocomplete="off"
+                        style="display: none;"
+                    >
+                    <div class="key-mode-hint" id="keyModeHint"></div>
+                </div>
+
+                <button
+                    class="generate-btn"
+                    id="generateBtn"
+                    type="button"
+                >
+                    🔗 Check & Generate
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 SECURITY STATUS
+            ========================== -->
+
+            <div class="security">
+
+                <div class="security-title">
+                    Link Security Status
+                </div>
+
+
+                <div class="status">
+
+                    <div class="status-dot"></div>
+
+                    <div class="status-text">
+                        Waiting for URL
+                    </div>
+
+                </div>
+
+
+                <div class="status-description">
+                    Enter a URL to check its security.
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 QR RESULT
+            ========================== -->
+
+            <div class="result">
+
+                <div class="result-title">
+                    Your QR Code
+                </div>
+
+
+                <div class="qr-placeholder">
+                    QR Code will appear here
+                </div>
+
+
+                <!-- URL -->
+
+                <div class="url-display">
+
+                    <span>
+                        Checked URL
+                    </span>
+
+
+                    <div class="url-text">
+                        Your URL will appear here
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="download-btn"
+                    id="downloadBtn"
+                    type="button"
+                    disabled
+                >
+                    ↓ Download QR
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 FOOTER
+            ========================== -->
+
+            <div class="footer">
+
+
+                <div class="made-by">
+
+                    MADE WITH CODE BY
+
+                    <strong>
+                        SRENOOG
+                    </strong>
+
+                </div>
+
+
+                <div class="team">
+
+
+                    <div class="team-row">
+
+                        <span>
+                            Ankit Acharya
+                        </span>
+
+                        <span>
+                            Utsav Joshi
+                        </span>
+
+                    </div>
+
+
+                    <div class="team-row">
+
+                        <span>
+                            Aditya Karki
+                        </span>
+
+                        <span>
+                            Shovan Kanel
+                        </span>
+
+                    </div>
+                    <div> Techsense Class project </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <script>
+        const urlInput = document.getElementById('urlInput');
+        const generateBtn = document.getElementById('generateBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        const keyModeDefault = document.getElementById('keyModeDefault');
+        const keyModeOwn = document.getElementById('keyModeOwn');
+        const ownApiKeyInput = document.getElementById('ownApiKeyInput');
+        const keyModeHint = document.getElementById('keyModeHint');
+
+        const statusDot = document.querySelector('.status-dot');
+        const statusText = document.querySelector('.status-text');
+        const statusDescription = document.querySelector('.status-description');
+
+        const qrPlaceholder = document.querySelector('.qr-placeholder');
+        const urlText = document.querySelector('.url-text');
+
+        // Keep the original placeholder markup so we can restore it on errors
+        const QR_PLACEHOLDER_DEFAULT = qrPlaceholder.innerHTML;
+
+        let currentQrBase64 = null;
+        let defaultKeyAvailable = false;
+
+        // Ask the backend (once, on page load) whether a default key is set up
+        // on this machine. We only ever get back true/false, never the key itself.
+        fetch('/status')
+            .then((r) => r.json())
+            .then((data) => {
+                defaultKeyAvailable = !!data.default_key_available;
+                updateKeyModeHint();
+            })
+            .catch(() => {
+                keyModeHint.textContent = 'Could not check server status.';
+            });
+
+        function updateKeyModeHint() {
+            if (keyModeOwn.checked) {
+                keyModeHint.textContent = 'Your key is sent with this request only, never stored.';
+            } else if (defaultKeyAvailable) {
+                keyModeHint.textContent = 'Using the Safe Browsing key configured on this machine.';
+            } else {
+                keyModeHint.textContent = 'No default key set up on this machine — heuristics only for now.';
+            }
+        }
+
+        keyModeDefault.addEventListener('change', () => {
+            ownApiKeyInput.style.display = 'none';
+            updateKeyModeHint();
+        });
+
+        keyModeOwn.addEventListener('change', () => {
+            ownApiKeyInput.style.display = 'block';
+            updateKeyModeHint();
+        });
+
+        function setStatus(state, text, description) {
+            // state is one of: 'idle', 'checking', 'low', 'medium', 'high'
+            statusDot.className = 'status-dot' + (state !== 'idle' ? ' ' + state : '');
+            statusText.textContent = text;
+            statusDescription.textContent = description;
+        }
+
+        function resetResult() {
+            qrPlaceholder.innerHTML = QR_PLACEHOLDER_DEFAULT;
+            urlText.textContent = 'Your URL will appear here';
+            downloadBtn.disabled = true;
+            currentQrBase64 = null;
+        }
+
+        async function handleGenerate() {
+            const rawUrl = urlInput.value.trim();
+
+            if (!rawUrl) {
+                setStatus('idle', 'Waiting for URL', 'Enter a URL to check its security.');
+                return;
+            }
+
+            generateBtn.disabled = true;
+            setStatus('checking', 'Checking...', 'Running security checks on your URL.');
+            resetResult();
+
+            try {
+                const response = await fetch('/check', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        url: rawUrl,
+                        key_mode: keyModeOwn.checked ? 'own' : 'default',
+                        api_key: keyModeOwn.checked ? ownApiKeyInput.value.trim() : '',
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (!data.valid) {
+                    setStatus('high', 'Invalid URL', data.error || 'Please check the URL format.');
+                    return;
+                }
+
+                // Build the description text from warnings + Safe Browsing result
+                let descriptionParts = [];
+
+                if (data.safe_browsing) {
+                    if (data.safe_browsing.flagged) {
+                        descriptionParts.push(
+                            'Google Safe Browsing flagged this URL: ' + data.safe_browsing.threats.join(', ')
+                        );
+                    } else if (data.safe_browsing.error) {
+                        descriptionParts.push('Safe Browsing check error: ' + data.safe_browsing.error);
+                    } else {
+                        descriptionParts.push('No listings found on Google Safe Browsing.');
+                    }
+                } else {
+                    descriptionParts.push('Google Safe Browsing not checked (no API key configured).');
+                }
+
+                if (data.warnings.length > 0) {
+                    descriptionParts.push(...data.warnings);
+                } else {
+                    descriptionParts.push('No obvious red flags in the URL structure.');
+                }
+
+                const stateClass = data.risk_level.toLowerCase(); // 'low' | 'medium' | 'high'
+                setStatus(stateClass, data.risk_level + ' Risk', descriptionParts.join(' · '));
+
+                // Show the QR code
+                currentQrBase64 = data.qr_base64;
+                qrPlaceholder.innerHTML = `<img src="data:image/png;base64,${data.qr_base64}" alt="Generated QR code">`;
+                urlText.textContent = data.url;
+                downloadBtn.disabled = false;
+
+            } catch (err) {
+                setStatus('high', 'Connection error', 'Could not reach the backend. Is app.py running?');
+            } finally {
+                generateBtn.disabled = false;
+            }
+        }
+
+        function handleDownload() {
+            if (!currentQrBase64) return;
+            const link = document.createElement('a');
+            link.href = `data:image/png;base64,${currentQrBase64}`;
+            link.download = 'secure_qr.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        generateBtn.addEventListener('click', handleGenerate);
+        downloadBtn.addEventListener('click', handleDownload);
+        urlInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') handleGenerate();
+        });
+    </script>
+
+</body>
+
+</html>
