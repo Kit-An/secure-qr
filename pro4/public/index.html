@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SRENOOG | QR Security</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================
+           BODY
+        ========================== */
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #15132a 0%,
+                    #0a0a10 40%,
+                    #06060a 100%
+                );
+
+            color: white;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           PAGE WRAPPER
+        ========================== */
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+
+            padding: 50px 20px;
+        }
+
+
+        /* =========================
+           MAIN CARD
+        ========================== */
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+
+            height: fit-content;
+
+            background: rgba(17, 17, 25, 0.96);
+
+            border: 1px solid #292938;
+
+            border-radius: 22px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.45),
+                0 0 50px rgba(100, 80, 255, 0.08);
+        }
+
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .header {
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+
+        .logo {
+            display: inline-block;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            letter-spacing: 6px;
+
+            color: #8b7cff;
+
+            margin-bottom: 15px;
+        }
+
+
+        h1 {
+            font-size: 38px;
+
+            line-height: 1.2;
+
+            margin-bottom: 12px;
+        }
+
+
+        .subtitle {
+            color: #92929f;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           INPUT SECTION
+        ========================== */
+
+        .input-section {
+            margin-top: 30px;
+        }
+
+
+        .input-label {
+            display: block;
+
+            margin-bottom: 10px;
+
+            font-size: 14px;
+
+            color: #c5c5d0;
+        }
+
+
+        .url-input {
+            width: 100%;
+
+            padding: 17px 16px;
+
+            background: #09090f;
+
+            border: 1px solid #303040;
+
+            border-radius: 12px;
+
+            color: white;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+
+        .url-input:focus {
+            border-color: #7567ff;
+
+            box-shadow:
+                0 0 18px rgba(117, 103, 255, 0.15);
+        }
+
+
+        .url-input::placeholder {
+            color: #626272;
+        }
+
+
+        /* =========================
+           MAIN BUTTON
+        ========================== */
+
+        .generate-btn {
+            width: 100%;
+
+            margin-top: 18px;
+
+            padding: 17px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: linear-gradient(
+                135deg,
+                #6f61ff,
+                #8b7cff
+            );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 30px rgba(117, 103, 255, 0.25);
+        }
+
+
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+
+
+        /* =========================
+           SECURITY STATUS
+        ========================== */
+
+        .security {
+            margin-top: 30px;
+
+            padding: 25px;
+
+            background: #0b0b12;
+
+            border: 1px solid #292938;
+
+            border-radius: 15px;
+
+            text-align: center;
+        }
+
+
+        .security-title {
+            font-size: 12px;
+
+            color: #777789;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+
+        .status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 11px 20px;
+
+            border-radius: 30px;
+
+            background: #15151f;
+
+            border: 1px solid #292938;
+
+            font-size: 15px;
+
+            font-weight: bold;
+        }
+
+
+        .status-dot {
+            width: 11px;
+
+            height: 11px;
+
+            border-radius: 50%;
+
+            background: #777;
+
+            box-shadow:
+                0 0 8px rgba(255, 255, 255, 0.15);
+        }
+
+
+        .status-text {
+            color: #c2c2ce;
+        }
+
+        .key-mode-section {
+            margin-top: 4px;
+        }
+
+        .key-mode-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #8a8a99;
+            margin-bottom: 8px;
+        }
+
+        .key-mode-toggle {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+
+        .key-mode-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #c2c2ce;
+            cursor: pointer;
+        }
+
+        .key-mode-option input[type="radio"] {
+            accent-color: #7567ff;
+            cursor: pointer;
+        }
+
+        .own-key-input {
+            margin-bottom: 8px;
+        }
+
+        .key-mode-hint {
+            font-size: 12px;
+            color: #8a8a99;
+            min-height: 16px;
+        }
+
+        /* Risk-state colors, added for backend integration */
+        .status-dot.checking {
+            background: #7567ff;
+            animation: pulse 1s infinite ease-in-out;
+        }
+
+        .status-dot.low {
+            background: #2ecc71;
+            box-shadow: 0 0 8px rgba(46, 204, 113, 0.6);
+        }
+
+        .status-dot.medium {
+            background: #f1c40f;
+            box-shadow: 0 0 8px rgba(241, 196, 15, 0.6);
+        }
+
+        .status-dot.high {
+            background: #e74c3c;
+            box-shadow: 0 0 8px rgba(231, 76, 60, 0.6);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
+        }
+
+        .qr-placeholder img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        .download-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+
+        .status-description {
+            margin-top: 13px;
+
+            color: #777789;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           QR RESULT
+        ========================== */
+
+        .result {
+            margin-top: 30px;
+
+            padding: 25px;
+
+            background: #0b0b12;
+
+            border: 1px solid #292938;
+
+            border-radius: 15px;
+
+            text-align: center;
+        }
+
+
+        .result-title {
+            font-size: 14px;
+
+            color: #9b9ba8;
+
+            margin-bottom: 22px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           QR PLACEHOLDER
+        ========================== */
+
+        .qr-placeholder {
+            width: 220px;
+
+            height: 220px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background: #161620;
+
+            border: 2px dashed #3a3a4d;
+
+            border-radius: 12px;
+
+            color: #666678;
+
+            font-size: 14px;
+
+            text-align: center;
+        }
+
+
+        /* =========================
+           URL DISPLAY
+        ========================== */
+
+        .url-display {
+            margin-top: 22px;
+
+            padding: 15px;
+
+            background: #14141e;
+
+            border: 1px solid #20202d;
+
+            border-radius: 10px;
+
+            text-align: left;
+        }
+
+
+        .url-display span {
+            display: block;
+
+            font-size: 12px;
+
+            color: #777789;
+
+            margin-bottom: 6px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+
+        .url-text {
+            color: #b9b4ff;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            word-break: break-all;
+        }
+
+
+        /* =========================
+           DOWNLOAD BUTTON
+        ========================== */
+
+        .download-btn {
+            margin-top: 18px;
+
+            padding: 12px 25px;
+
+            background: transparent;
+
+            border: 1px solid #3a3a50;
+
+            border-radius: 10px;
+
+            color: #aaaabc;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        .download-btn:hover {
+            border-color: #7567ff;
+
+            color: white;
+
+            box-shadow:
+                0 5px 20px rgba(117, 103, 255, 0.1);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        .footer {
+            margin-top: 35px;
+
+            padding-top: 28px;
+
+            border-top: 1px solid #292938;
+
+            text-align: center;
+
+            color: #656575;
+
+            font-size: 12px;
+        }
+
+
+        .made-by {
+            letter-spacing: 2px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .made-by strong {
+            display: block;
+
+            margin-top: 8px;
+
+            color: #8b7cff;
+
+            font-size: 17px;
+
+            letter-spacing: 4px;
+
+            text-shadow:
+                0 0 15px rgba(139, 124, 255, 0.25);
+        }
+
+
+        /* =========================
+           TEAM
+        ========================== */
+
+        .team {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+            width: 100%;
+
+            max-width: 320px;
+
+            margin: 0 auto;
+        }
+
+
+        .team-row {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+        }
+
+
+        .team-row span {
+            padding: 11px;
+
+            background: #0b0b12;
+
+            border: 1px solid #292938;
+
+            border-radius: 8px;
+
+            color: #b5b5c4;
+
+            font-size: 13px;
+
+            letter-spacing: 1px;
+
+            transition: 0.3s;
+        }
+
+
+        .team-row span:hover {
+            border-color: #7567ff;
+
+            color: white;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 15px rgba(117, 103, 255, 0.12);
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .page {
+                padding: 20px 12px;
+            }
+
+
+            .container {
+                padding: 25px 18px;
+
+                border-radius: 18px;
+            }
+
+
+            h1 {
+                font-size: 30px;
+            }
+
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+
+            .qr-placeholder {
+                width: 190px;
+
+                height: 190px;
+            }
+
+
+            .team {
+                max-width: 280px;
+            }
+
+        }
+
+    
+/* ===== PROTOTYPE 4: QR HISTORY DRAWER ===== */
+.history-menu{position:fixed;top:22px;right:22px;z-index:1000}
+.history-menu-btn{width:48px;height:48px;display:flex;align-items:center;justify-content:center;gap:5px;flex-direction:column;border:1px solid #353548;border-radius:13px;background:rgba(12,12,19,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 24px rgba(117,103,255,.07);transition:.25s}
+.history-menu-btn:hover{transform:translateY(-2px);border-color:#7567ff;box-shadow:0 12px 32px rgba(0,0,0,.4),0 0 28px rgba(117,103,255,.16)}
+.history-menu-btn span{width:19px;height:2px;border-radius:10px;background:#d8d7e8;transition:transform .3s,opacity .25s}
+.history-menu-btn.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.history-menu-btn.active span:nth-child(2){opacity:0}
+.history-menu-btn.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.history-backdrop{position:fixed;inset:0;z-index:998;background:rgba(0,0,0,.48);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .35s}
+.history-backdrop.open{opacity:1;pointer-events:auto}
+.history-drawer{position:fixed;top:0;right:0;z-index:999;width:min(430px,92vw);height:100vh;padding:30px 24px 0;background:linear-gradient(160deg,rgba(21,20,34,.98),rgba(7,7,12,.99));border-left:1px solid #303044;box-shadow:-25px 0 70px rgba(0,0,0,.5),-5px 0 35px rgba(117,103,255,.08);transform:translateX(105%);transition:transform .5s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;overflow:hidden}
+.history-drawer.open{transform:translateX(0)}
+.history-drawer:before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,#7567ff,#a69cff,transparent);opacity:0}
+.history-drawer.open:before{opacity:1;animation:historyScanner 2.4s linear infinite;animation-delay:.5s;transition:opacity .3s ease .5s}
+@keyframes historyScanner{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.history-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:20px;margin-bottom:18px;border-bottom:1px solid #292938;flex-shrink:0}
+.history-title-wrap{display:flex;align-items:center;gap:11px}
+.history-title{font-size:25px;font-weight:700;letter-spacing:1px}
+.history-count{min-width:25px;height:25px;padding:0 7px;display:inline-flex;align-items:center;justify-content:center;border-radius:20px;background:#7567ff;color:white;font-size:12px;font-weight:bold}
+.history-clear{border:1px solid #353548;border-radius:9px;padding:8px 10px;background:transparent;color:#8f8f9e;cursor:pointer;font-size:11px;text-transform:uppercase;letter-spacing:1px;transition:.25s}
+.history-clear:hover{color:white;border-color:#7567ff}
+.history-empty{padding:60px 18px;text-align:center;color:#777789;font-size:14px;line-height:1.7;flex-shrink:0}
+.history-empty strong{display:block;color:#c5c4d2;font-size:17px;margin-bottom:7px}
+.history-list{display:flex;flex-direction:column;gap:14px;flex:1;overflow-y:auto;padding-bottom:20px}
+.history-footer{flex-shrink:0;padding:16px 0 24px;border-top:1px solid #292938;display:flex;justify-content:flex-start}
+.history-item{position:relative;overflow:hidden;display:grid;grid-template-columns:76px 1fr;gap:14px;padding:13px;background:rgba(12,12,20,.86);border:1px solid #292938;border-radius:14px;transform:translateX(25px);opacity:0;animation:historyItemIn .55s cubic-bezier(.16,1,.3,1) forwards;transition:.25s}
+.history-item:hover{transform:translateX(-3px);border-color:#484866;box-shadow:0 10px 28px rgba(0,0,0,.25)}
+@keyframes historyItemIn{to{transform:translateX(0);opacity:1}}
+.history-qr{width:76px;height:76px;padding:5px;display:flex;align-items:center;justify-content:center;background:white;border-radius:9px;overflow:hidden}
+.history-qr img{width:100%;height:100%;object-fit:cover}
+.history-details{min-width:0}
+.history-url{color:#dddcea;font-size:13px;line-height:1.45;word-break:break-all;margin-bottom:9px;padding-right:20px}
+.history-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.history-risk{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:20px;background:#171720;border:1px solid #2b2b39;font-size:11px;font-weight:bold}
+.history-risk-dot{width:7px;height:7px;border-radius:50%}
+.history-risk.low .history-risk-dot{background:#2ecc71;box-shadow:0 0 8px rgba(46,204,113,.6)}
+.history-risk.medium .history-risk-dot{background:#f1c40f;box-shadow:0 0 8px rgba(241,196,15,.6)}
+.history-risk.high .history-risk-dot,.history-risk.invalid .history-risk-dot{background:#e74c3c;box-shadow:0 0 8px rgba(231,76,60,.6)}
+.history-time{color:#666678;font-size:10px}
+.history-delete{position:absolute;top:9px;right:9px;width:24px;height:24px;border:0;border-radius:7px;background:transparent;color:#666678;cursor:pointer;transition:.2s}
+.history-delete:hover{color:#ff7777;background:rgba(231,76,60,.08)}
+@media(max-width:600px){.history-menu{top:14px;right:14px}.history-menu-btn{width:44px;height:44px}.history-drawer{width:94vw;padding:25px 17px 0}}
+
+/* =========================================================
+   SCROLL REVEAL — page sections fade/slide in as you scroll
+   ========================================================= */
+
+body {
+    overflow-x: hidden;
+}
+
+.header,
+.input-section,
+.key-mode-section,
+.generate-btn,
+.security,
+.result,
+.footer {
+    opacity: 0;
+    transform: translate3d(0, 70px, 0) scale(.94);
+    filter: blur(7px);
+    transition:
+        opacity .9s cubic-bezier(.16,1,.3,1),
+        transform 1s cubic-bezier(.16,1,.3,1),
+        filter .9s cubic-bezier(.16,1,.3,1);
+    will-change: transform, opacity, filter;
+}
+
+.header {
+    opacity: 1;
+    transform: none;
+    filter: none;
+}
+
+.sr-reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0,0,0) scale(1);
+    filter: blur(0);
+}
+
+.sr-left {
+    transform: translate3d(-115px, 55px, 0) scale(.94);
+}
+
+.sr-right {
+    transform: translate3d(115px, 55px, 0) scale(.94);
+}
+
+.sr-left.is-visible,
+.sr-right.is-visible {
+    transform: translate3d(0,0,0) scale(1);
+}
+
+.security.is-visible,
+.result.is-visible {
+    transition-duration: 1.1s;
+}
+
+.input-section,
+.security,
+.result {
+    transition:
+        opacity .9s cubic-bezier(.16,1,.3,1),
+        transform 1s cubic-bezier(.16,1,.3,1),
+        filter .9s cubic-bezier(.16,1,.3,1),
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.input-section.is-visible:hover,
+.security.is-visible:hover,
+.result.is-visible:hover {
+    transform: translate3d(0,-5px,0) scale(1.008);
+}
+
+.input-section.is-visible {
+    transition-delay: .05s;
+}
+
+.key-mode-section.is-visible {
+    transition-delay: .10s;
+}
+
+.generate-btn.is-visible {
+    transition-delay: .16s;
+}
+
+.security.is-visible {
+    transition-delay: .04s;
+}
+
+.result.is-visible {
+    transition-delay: .08s;
+}
+
+.footer.is-visible {
+    transition-delay: .12s;
+}
+
+/* =========================================================
+   HISTORY DRAWER HEADER — small entrance so it doesn't feel
+   static/flat compared to the scanner line + card animations
+   ========================================================= */
+
+.history-title-wrap,
+.history-clear {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity .45s ease .18s, transform .45s ease .18s;
+}
+
+.history-drawer.open .history-title-wrap,
+.history-drawer.open .history-clear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+    <div class="page">
+
+        <div class="container">
+
+
+            <!-- =========================
+                 HEADER
+            ========================== -->
+
+            <div class="header">
+
+                <div class="logo">
+                    SRENOOG
+                </div>
+
+                <h1>
+                    QR Security
+                </h1>
+
+                <p class="subtitle">
+                    Check your link before generating a QR code.
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 URL INPUT
+            ========================== -->
+
+            <div class="input-section">
+
+                <label
+                    class="input-label"
+                    for="urlInput"
+                >
+                    Paste your URL
+                </label>
+
+
+                <input
+                    type="text"
+                    class="url-input"
+                    id="urlInput"
+                    placeholder="https://example.com"
+                    autocomplete="off"
+                >
+
+                <div class="key-mode-section">
+                    <div class="key-mode-label">Safe Browsing check</div>
+                    <div class="key-mode-toggle">
+                        <label class="key-mode-option">
+                            <input type="radio" name="keyMode" value="default" id="keyModeDefault" checked>
+                            Use Default
+                        </label>
+                        <label class="key-mode-option">
+                            <input type="radio" name="keyMode" value="own" id="keyModeOwn">
+                            Use Your Own Key
+                        </label>
+                    </div>
+                    <input
+                        type="text"
+                        class="url-input own-key-input"
+                        id="ownApiKeyInput"
+                        placeholder="Paste your Google Safe Browsing API key"
+                        autocomplete="off"
+                        style="display: none;"
+                    >
+                    <div class="key-mode-hint" id="keyModeHint"></div>
+                </div>
+
+                <button
+                    class="generate-btn"
+                    id="generateBtn"
+                    type="button"
+                >
+                    🔗 Check & Generate
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 SECURITY STATUS
+            ========================== -->
+
+            <div class="security">
+
+                <div class="security-title">
+                    Link Security Status
+                </div>
+
+
+                <div class="status">
+
+                    <div class="status-dot"></div>
+
+                    <div class="status-text">
+                        Waiting for URL
+                    </div>
+
+                </div>
+
+
+                <div class="status-description">
+                    Enter a URL to check its security.
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 QR RESULT
+            ========================== -->
+
+            <div class="result">
+
+                <div class="result-title">
+                    Your QR Code
+                </div>
+
+
+                <div class="qr-placeholder">
+                    QR Code will appear here
+                </div>
+
+
+                <!-- URL -->
+
+                <div class="url-display">
+
+                    <span>
+                        Checked URL
+                    </span>
+
+
+                    <div class="url-text">
+                        Your URL will appear here
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="download-btn"
+                    id="downloadBtn"
+                    type="button"
+                    disabled
+                >
+                    ↓ Download QR
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 FOOTER
+            ========================== -->
+
+            <div class="footer">
+
+
+                <div class="made-by">
+
+                    MADE WITH CODE BY
+
+                    <strong>
+                        SRENOOG
+                    </strong>
+
+                </div>
+
+
+                <div class="team">
+
+
+                    <div class="team-row">
+
+                        <span>
+                            Ankit Acharya
+                        </span>
+
+                        <span>
+                            Utsav Joshi
+                        </span>
+
+                    </div>
+
+
+                    <div class="team-row">
+
+                        <span>
+                            Aditya Karki
+                        </span>
+
+                        <span>
+                            Shovan Kanel
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <script>
+        const urlInput = document.getElementById('urlInput');
+        const generateBtn = document.getElementById('generateBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        const keyModeDefault = document.getElementById('keyModeDefault');
+        const keyModeOwn = document.getElementById('keyModeOwn');
+        const ownApiKeyInput = document.getElementById('ownApiKeyInput');
+        const keyModeHint = document.getElementById('keyModeHint');
+
+        const statusDot = document.querySelector('.status-dot');
+        const statusText = document.querySelector('.status-text');
+        const statusDescription = document.querySelector('.status-description');
+
+        const qrPlaceholder = document.querySelector('.qr-placeholder');
+        const urlText = document.querySelector('.url-text');
+
+        // Keep the original placeholder markup so we can restore it on errors
+        const QR_PLACEHOLDER_DEFAULT = qrPlaceholder.innerHTML;
+
+        let currentQrBase64 = null;
+        window.currentQrBase64 = null;
+        let defaultKeyAvailable = false;
+
+        // Ask the backend (once, on page load) whether a default key is set up
+        // on this machine. We only ever get back true/false, never the key itself.
+        fetch('/status')
+            .then((r) => r.json())
+            .then((data) => {
+                defaultKeyAvailable = !!data.default_key_available;
+                updateKeyModeHint();
+            })
+            .catch(() => {
+                keyModeHint.textContent = 'Could not check server status.';
+            });
+
+        function updateKeyModeHint() {
+            if (keyModeOwn.checked) {
+                keyModeHint.textContent = 'Your key is sent with this request only, never stored.';
+            } else if (defaultKeyAvailable) {
+                keyModeHint.textContent = 'Using the Safe Browsing key configured on this machine.';
+            } else {
+                keyModeHint.textContent = 'No default key set up on this machine — heuristics only for now.';
+            }
+        }
+
+        keyModeDefault.addEventListener('change', () => {
+            ownApiKeyInput.style.display = 'none';
+            updateKeyModeHint();
+        });
+
+        keyModeOwn.addEventListener('change', () => {
+            ownApiKeyInput.style.display = 'block';
+            updateKeyModeHint();
+        });
+
+        function setStatus(state, text, description) {
+            // state is one of: 'idle', 'checking', 'low', 'medium', 'high'
+            statusDot.className = 'status-dot' + (state !== 'idle' ? ' ' + state : '');
+            statusText.textContent = text;
+            statusDescription.textContent = description;
+        }
+
+        function resetResult() {
+            qrPlaceholder.innerHTML = QR_PLACEHOLDER_DEFAULT;
+            urlText.textContent = 'Your URL will appear here';
+            downloadBtn.disabled = true;
+            currentQrBase64 = null;
+        }
+
+        async function handleGenerate() {
+            const rawUrl = urlInput.value.trim();
+
+            if (!rawUrl) {
+                setStatus('idle', 'Waiting for URL', 'Enter a URL to check its security.');
+                return;
+            }
+
+            generateBtn.disabled = true;
+            setStatus('checking', 'Checking...', 'Running security checks on your URL.');
+            resetResult();
+
+            try {
+                const response = await fetch('/check', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        url: rawUrl,
+                        key_mode: keyModeOwn.checked ? 'own' : 'default',
+                        api_key: keyModeOwn.checked ? ownApiKeyInput.value.trim() : '',
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (!data.valid) {
+                    setStatus('high', 'Invalid URL', data.error || 'Please check the URL format.');
+                    return;
+                }
+
+                // Build the description text from warnings + Safe Browsing result
+                let descriptionParts = [];
+
+                if (data.safe_browsing) {
+                    if (data.safe_browsing.flagged) {
+                        descriptionParts.push(
+                            'Google Safe Browsing flagged this URL: ' + data.safe_browsing.threats.join(', ')
+                        );
+                    } else if (data.safe_browsing.error) {
+                        descriptionParts.push('Safe Browsing check error: ' + data.safe_browsing.error);
+                    } else {
+                        descriptionParts.push('No listings found on Google Safe Browsing.');
+                    }
+                } else {
+                    descriptionParts.push('Google Safe Browsing not checked (no API key configured).');
+                }
+
+                if (data.warnings.length > 0) {
+                    descriptionParts.push(...data.warnings);
+                } else {
+                    descriptionParts.push('No obvious red flags in the URL structure.');
+                }
+
+                const stateClass = data.risk_level.toLowerCase(); // 'low' | 'medium' | 'high'
+                setStatus(stateClass, data.risk_level + ' Risk', descriptionParts.join(' · '));
+
+                // Show the QR code
+                currentQrBase64 = data.qr_base64;
+                window.currentQrBase64 = currentQrBase64;
+                qrPlaceholder.innerHTML = `<img src="data:image/png;base64,${data.qr_base64}" alt="Generated QR code">`;
+                urlText.textContent = data.url;
+                downloadBtn.disabled = false;
+
+            } catch (err) {
+                setStatus('high', 'Connection error', 'Could not reach the backend. Is app.py running?');
+            } finally {
+                generateBtn.disabled = false;
+            }
+        }
+
+        function handleDownload() {
+            if (!currentQrBase64) return;
+            const link = document.createElement('a');
+            link.href = `data:image/png;base64,${currentQrBase64}`;
+            link.download = 'secure_qr.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        generateBtn.addEventListener('click', handleGenerate);
+        downloadBtn.addEventListener('click', handleDownload);
+        urlInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') handleGenerate();
+        });
+    </script>
+
+
+<!-- PROTOTYPE 4: HISTORY -->
+<div class="history-menu">
+  <button class="history-menu-btn" id="historyMenuBtn" type="button" aria-label="Open QR history" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+<div class="history-backdrop" id="historyBackdrop"></div>
+<aside class="history-drawer" id="historyDrawer" aria-hidden="true">
+  <div class="history-header">
+    <div class="history-title-wrap">
+      <div class="history-title">History</div>
+      <div class="history-count" id="historyCount">0</div>
+    </div>
+  </div>
+  <div class="history-empty" id="historyEmpty">
+    <strong>No scans yet</strong>
+    Your checked QR codes will appear here.
+  </div>
+  <div class="history-list" id="historyList"></div>
+  <div class="history-footer">
+    <button class="history-clear" id="historyClearBtn" type="button">Clear</button>
+  </div>
+</aside>
+
+
+<script>
+/* ===================================
+          |HISTORY CONTROLLER|
+   =================================== */ 
+
+document.addEventListener("DOMContentLoaded", () => {
+  const menu = document.getElementById("historyMenuBtn");
+  const drawer = document.getElementById("historyDrawer");
+  const backdrop = document.getElementById("historyBackdrop");
+  const list = document.getElementById("historyList");
+  const empty = document.getElementById("historyEmpty");
+  const count = document.getElementById("historyCount");
+  const clear = document.getElementById("historyClearBtn");
+  const qrBox = document.querySelector(".qr-placeholder");
+  const urlBox = document.querySelector(".url-text");
+  const statusBox = document.querySelector(".status-text");
+  const KEY = "srenoog_qr_history_v1";
+  const MAX = 25;
+  let items = [];
+
+  function load() {
+    try {
+      items = JSON.parse(localStorage.getItem(KEY) || "[]");
+      if (!Array.isArray(items)) items = [];
+    } catch { items = []; }
+    render();
+  }
+
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(items)); } catch {}
+  }
+
+  function esc(v) {
+    return String(v ?? "").replace(/[&<>"']/g, c => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[c]));
+  }
+
+  function time(v) {
+    try { return new Date(v).toLocaleString([], {dateStyle:"medium", timeStyle:"short"}); }
+    catch { return ""; }
+  }
+
+  function add(url, risk, qr) {
+    if (!url || !qr) return;
+    items.unshift({
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2),
+      url, risk, qr, time: new Date().toISOString()
+    });
+    items = items.slice(0, MAX);
+    save();
+    render();
+  }
+
+  function render() {
+    list.innerHTML = "";
+    count.textContent = items.length;
+    empty.style.display = items.length ? "none" : "block";
+
+    items.forEach((item, i) => {
+      const risk = ["low","medium","high","invalid"].includes(item.risk) ? item.risk : "high";
+      const label = risk === "low" ? "LOW RISK" :
+                    risk === "medium" ? "MEDIUM RISK" :
+                    risk === "invalid" ? "INVALID" : "HIGH RISK";
+
+      const card = document.createElement("div");
+      card.className = "history-item";
+      card.style.animationDelay = Math.min(i * 45, 300) + "ms";
+      card.innerHTML = `
+        <div class="history-qr">
+          <img src="data:image/png;base64,${item.qr}" alt="Saved QR code">
+        </div>
+        <div class="history-details">
+          <div class="history-url">${esc(item.url)}</div>
+          <div class="history-meta">
+            <div class="history-risk ${risk}">
+              <span class="history-risk-dot"></span>${label}
+            </div>
+            <div class="history-time">${esc(time(item.time))}</div>
+          </div>
+        </div>
+        <button class="history-delete" type="button" aria-label="Delete history item" data-id="${esc(item.id)}">×</button>
+      `;
+      list.appendChild(card);
+    });
+  }
+
+  function open() {
+    drawer.classList.add("open");
+    backdrop.classList.add("open");
+    menu.classList.add("active");
+    menu.setAttribute("aria-expanded","true");
+    drawer.setAttribute("aria-hidden","false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function close() {
+    drawer.classList.remove("open");
+    backdrop.classList.remove("open");
+    menu.classList.remove("active");
+    menu.setAttribute("aria-expanded","false");
+    drawer.setAttribute("aria-hidden","true");
+    document.body.style.overflow = "";
+  }
+
+  menu.addEventListener("click", () => drawer.classList.contains("open") ? close() : open());
+  backdrop.addEventListener("click", close);
+  clear.addEventListener("click", () => {
+    items = [];
+    save();
+    render();
+  });
+  list.addEventListener("click", e => {
+    const btn = e.target.closest(".history-delete");
+    if (!btn) return;
+    items = items.filter(x => x.id !== btn.dataset.id);
+    save();
+    render();
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+
+  // Watch the existing QR result. This records each newly generated QR
+  // without changing the existing /check request or download function.
+  if (qrBox && urlBox) {
+    const observer = new MutationObserver(() => {
+      const img = qrBox.querySelector("img");
+      const url = urlBox.textContent.trim();
+      const qr = window.currentQrBase64;
+      if (!img || !url || !qr) return;
+
+      const text = (statusBox?.textContent || "").toLowerCase();
+      const risk = text.includes("low") ? "low" :
+                   text.includes("medium") ? "medium" :
+                   text.includes("invalid") ? "invalid" : "high";
+
+      const sig = url + "|" + risk + "|" + qr.slice(0, 60);
+      if (window.__srenoogHistorySig === sig) return;
+      window.__srenoogHistorySig = sig;
+      add(url, risk, qr);
+    });
+    observer.observe(qrBox, {childList:true, subtree:true});
+  }
+
+  load();
+});
+</script>
+
+<script>
+/* =========================================================
+   Scroll reveal controller — animation only, no logic touched
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+    const revealTargets = [
+        ".input-section",
+        ".key-mode-section",
+        ".generate-btn",
+        ".security",
+        ".result",
+        ".footer"
+    ];
+
+    const elements = document.querySelectorAll(revealTargets.join(","));
+
+    elements.forEach((el, index) => {
+        el.classList.add("sr-reveal");
+
+        if (index % 2 === 0) {
+            el.classList.add("sr-left");
+        } else {
+            el.classList.add("sr-right");
+        }
+    });
+
+    if (!("IntersectionObserver" in window)) {
+        elements.forEach(el => el.classList.add("is-visible"));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+            } else {
+                entry.target.classList.remove("is-visible");
+            }
+        });
+    }, {
+        threshold: 0.18,
+        rootMargin: "0px 0px -8% 0px"
+    });
+
+    elements.forEach(el => observer.observe(el));
+});
+</script>
+
+</body>
+
+</html>
