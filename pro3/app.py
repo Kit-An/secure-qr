@@ -6,30 +6,25 @@ import urllib.parse
 from qr_generator import generate_and_save_qr
 from scanner import evaluate_heuristics, query_google_safe_browsing
 
-DEFAULT_GOOGLE_API_KEY = "AIzaSyDT2srrwUmeJtkl0R8XXVf7PU6Iq_x8LXM"
-
 
 def _get_api_key():
-   """Return the configured, default, or interactively supplied API key."""
+    """Return the configured, default, or interactively supplied API key."""
     env_key = os.getenv("SAFE_BROWSING_API_KEY")
     if env_key:
         return env_key
 
     print("\nGoogle Safe Browsing API Configuration:")
-    print("  [1] Use default API key")
-    print("  [2] Enter your own API key")
-    print("  [3] Skip Safe Browsing lookup (heuristics only)")
+    print("  [1] Enter your own API key")
+    print("  [2] Skip Safe Browsing lookup (heuristics only)")
 
-    choice = input("Select an option (1/2/3) [default: 1]: ").strip()
+    choice = input("Select an option (1/2) [default: 2]: ").strip()
 
-    if choice == "2":
+    if choice == "1":
         custom_key = input("Enter your Google Safe Browsing API key: ").strip()
         return custom_key if custom_key else None
-    elif choice == "3":
-        return None
 
-    # Default to option 1
-    return DEFAULT_GOOGLE_API_KEY
+    # Default: skip Safe Browsing lookup
+    return None
 
 
 def _get_url():
